@@ -882,6 +882,14 @@ void rgblight_task(void) {
             effect_func   = (effect_func_t)rgblight_effect_alternating;
         }
 #    endif
+// tck start
+#    ifdef RGBLIGHT_EFFECT_TWOTONES
+        else if (rgblight_status.base_mode == RGBLIGHT_MODE_TWOTONES) {
+            interval_time = 100;
+            effect_func   = (effect_func_t)rgblight_effect_twotones;
+        }
+#    endif
+// tck end
         if (animation_status.restart) {
             animation_status.restart    = false;
             animation_status.last_timer = timer_read() - interval_time - 1;
@@ -1162,3 +1170,26 @@ void rgblight_effect_alternating(animation_status_t *anim) {
     anim->pos = (anim->pos + 1) % 2;
 }
 #endif
+
+// tck start
+#ifdef RGBLIGHT_EFFECT_TWOTONES
+# ifndef RGBLIGHT_TWOTONES_OFFSET
+#  define RGBLIGHT_TWOTONES_OFFSET 64
+# endif
+
+void rgblight_effect_twotones(animation_status_t * anim)
+{
+    uint8_t base = rgblight_config.hue;
+
+    for (int i = 0; i < effect_num_leds; i++)
+    {
+        LED_TYPE *ledp = led + i + effect_start_pos;
+
+        uint8_t h = base + fabs(sin( 3.14159 * i / effect_num_leds + anim->pos / 10.0)) * RGBLIGHT_TWOTONES_OFFSET;
+        sethsv(h, rgblight_config.sat, rgblight_config.val, ledp);
+    }
+    rgblight_set();
+    anim->pos += 1;
+}
+#endif
+// tck end

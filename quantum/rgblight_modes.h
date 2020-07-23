@@ -53,6 +53,11 @@ _RGBM_SINGLE_DYNAMIC(RGB_TEST)
 #    ifdef RGBLIGHT_EFFECT_ALTERNATING
 _RGBM_SINGLE_DYNAMIC(ALTERNATING)
 #    endif
+// tck start
+#    ifdef RGBLIGHT_EFFECT_TWOTONES
+_RGBM_SINGLE_DYNAMIC(TWOTONES)
+#    endif
+// tck end
 ////  Add a new mode here.
 // #ifdef RGBLIGHT_EFFECT_<name>
 //    _RGBM_<SINGLE|MULTI>_<STATIC|DYNAMIC>( <name> )

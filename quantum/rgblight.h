@@ -73,6 +73,9 @@
 #    define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #    define RGBLIGHT_EFFECT_RGB_TEST
 #    define RGBLIGHT_EFFECT_ALTERNATING
+// tck start
+#    define RGBLIGHT_EFFECT_TWOTONES
+// tck end
 #endif
 
 #ifdef RGBLIGHT_STATIC_PATTERNS
@@ -89,7 +92,8 @@
   || defined(RGBLIGHT_EFFECT_KNIGHT)        \
   || defined(RGBLIGHT_EFFECT_CHRISTMAS)     \
   || defined(RGBLIGHT_EFFECT_RGB_TEST)      \
-  || defined(RGBLIGHT_EFFECT_ALTERNATING)
+  || defined(RGBLIGHT_EFFECT_ALTERNATING)   \
+  || defined(RGBLIGHT_EFFECT_TWOTONES) // tck
 #    define RGBLIGHT_USE_TIMER
 #endif
 
@@ -381,6 +385,7 @@ void rgblight_effect_knight(animation_status_t *anim);
 void rgblight_effect_christmas(animation_status_t *anim);
 void rgblight_effect_rgbtest(animation_status_t *anim);
 void rgblight_effect_alternating(animation_status_t *anim);
+void rgblight_effect_twotones(animation_status_t *anim);
 
 #    endif
 
