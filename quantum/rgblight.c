@@ -1228,11 +1228,11 @@ void rgblight_effect_twotones(animation_status_t * anim)
 {
     uint8_t base = rgblight_config.hue;
 
-    for (int i = 0; i < effect_num_leds; i++)
+    for (int i = 0; i < rgblight_ranges.effect_num_leds; i++)
     {
-        LED_TYPE *ledp = led + i + effect_start_pos;
+        LED_TYPE *ledp = led + i + rgblight_ranges.effect_start_pos;
 
-        uint8_t h = base + fabs(sin( 3.14159 * i / effect_num_leds + anim->pos / 10.0)) * RGBLIGHT_TWOTONES_OFFSET;
+        uint8_t h = base + fabs(sin( 3.14159 * i / rgblight_ranges.effect_num_leds + anim->pos / 10.0)) * RGBLIGHT_TWOTONES_OFFSET;
         sethsv(h, rgblight_config.sat, rgblight_config.val, ledp);
     }
     rgblight_set();
